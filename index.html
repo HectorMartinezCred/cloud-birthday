@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Feliz Cumpleaños! 🎂</title>
+  <meta name="description" content="Página especial de cumpleaños con cuenta regresiva y celebración." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Fondo espacial -->
+  <canvas id="space-canvas"></canvas>
+
+  <!-- ===== VISTA CUENTA ATRÁS ===== -->
+  <section id="countdown-view" class="view">
+    <div class="countdown-container">
+      <div class="sparkle-ring"></div>
+      <p class="countdown-subtitle">¡Se acerca un día muy especial!</p>
+      <h1 class="countdown-name">
+        <span class="name-glow">☁️ Elizabeth ☁️</span>
+      </h1>
+      <p class="countdown-label">cumplirás años en</p>
+
+      <div id="countdown-timer" class="timer">
+        <div class="timer-block" id="timer-days">
+          <span class="timer-value">00</span>
+          <span class="timer-unit">Días</span>
+        </div>
+        <div class="timer-separator">:</div>
+        <div class="timer-block" id="timer-hours">
+          <span class="timer-value">00</span>
+          <span class="timer-unit">Horas</span>
+        </div>
+        <div class="timer-separator">:</div>
+        <div class="timer-block" id="timer-minutes">
+          <span class="timer-value">00</span>
+          <span class="timer-unit">Minutos</span>
+        </div>
+        <div class="timer-separator">:</div>
+        <div class="timer-block" id="timer-seconds">
+          <span class="timer-value">00</span>
+          <span class="timer-unit">Segundos</span>
+        </div>
+      </div>
+
+      <div class="countdown-date-badge">
+        <span>📅</span> 15 de Junio
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VISTA DE CUMPLEAÑOS ===== -->
+  <section id="birthday-view" class="view hidden">
+    <!-- Canvas de Confeti -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <header class="birthday-header">
+      <div class="balloon balloon-left">🎈</div>
+      <div class="balloon balloon-right">🎈</div>
+      <p class="birthday-tagline">✨ ¡Hoy es el gran día! ✨</p>
+      <h1 class="birthday-title">
+        <span class="letter-animate">¡</span><span class="letter-animate">F</span><span
+          class="letter-animate">e</span><span class="letter-animate">l</span><span class="letter-animate">i</span><span
+          class="letter-animate">z</span>
+        <span class="letter-animate">&nbsp;</span>
+        <span class="letter-animate">C</span><span class="letter-animate">u</span><span
+          class="letter-animate">m</span><span class="letter-animate">p</span><span class="letter-animate">l</span><span
+          class="letter-animate">e</span><span class="letter-animate">a</span><span class="letter-animate">ñ</span><span
+          class="letter-animate">o</span><span class="letter-animate">s</span><span class="letter-animate">!</span>
+      </h1>
+      <h2 class="birthday-name">Elizabeth</h2>
+      <div class="cake-emoji">🎂</div>
+      <p class="birthday-message">
+        Que este nuevo año de vida esté lleno de momentos increíbles,
+        risas interminables y sueños cumplidos. ¡Eres una persona maravillosa
+        y mereces todo lo mejor del mundo! 🎉🥳
+      </p>
+    </header>
+  </section>
+
+  <!-- Colección de fotos -->
+  <section class="collage-section hidden" id="collage-section">
+    <h2 class="collage-title">📸 Momentos Especiales</h2>
+    <div class="collage-grid" id="collage-grid">
+      <!-- Espacio para cargar las imágenes. -->
+    </div>
+  </section>
+
+  <!-- Sección de deseos -->
+  <section class="wishes-section hidden" id="wishes-section">
+    <div class="wishes-card">
+      <h2 class="wishes-title">☁️ Mis Mejores Deseos ☁️</h2>
+      <div class="wishes-list">
+        <div class="wish-item">
+          <span class="wish-emoji">📏</span>
+          <p>Esperemos que este año si crezcas.</p>
+        </div>
+        <div class="wish-item">
+          <span class="wish-emoji">🚀</span>
+          <p>Que sigas socializando mejor de lo que fue el año pasado.</p>
+        </div>
+        <div class="wish-item">
+          <span class="wish-emoji">💖</span>
+          <p>Que el amor y la alegría te acompañen siempre.</p>
+        </div>
+        <div class="wish-item">
+          <span class="wish-emoji">🎊</span>
+          <p>Que la vida te siga regalando momentos inolvidables.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="birthday-footer hidden" id="birthday-footer">
+    <p>Hecho con mucho ❤️ para ti</p>
+    <p class="footer-year">Elizabeth - Cloud - Nublosaurus - Salchipancito - Calud - Caldo - Chiquistriquis</p>
+  </footer>
+  <!-- Ventada de fotos ampliadas -->
+  <div class="lightbox hidden" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Foto ampliada" />
+  </div>
+
+  <script src="app.js"></script>
+  <script src="img/data1.js"></script>
+  <script src="img/data2.js"></script>
+  <script src="img/data3.js"></script>
+  <script src="img/data4.js"></script>
+  <script src="img/data5.js"></script>
+  <script src="img/data6.js"></script>
+  <script src="img/imagenes.js"></script>
+</body>
+
+</html>

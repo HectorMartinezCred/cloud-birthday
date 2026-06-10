@@ -1,0 +1,817 @@
+/* ================================================
+   PAGINA DE CUMPLEAÑOS — Sistema de Diseño y Estilos
+   ================================================ */
+
+/* --- Propiedades Personalizadas CSS --- */
+:root {
+  /* Colores */
+  --clr-bg-deep: #030d1a;
+  --clr-bg-card: rgba(255, 255, 255, 0.04);
+  --clr-bg-glass: rgba(255, 255, 255, 0.07);
+  --clr-primary: #5cc8f0;
+  --clr-primary-light: #cceeff;
+  --clr-accent: #38bdf8;
+  --clr-accent-warm: #67e8f9;
+  --clr-gold: #7dd3fc;
+  --clr-text: #e4f4ff;
+  --clr-text-dim: #8ab4cc;
+  --clr-border: rgba(92, 200, 240, 0.15);
+
+  /* Gradientes */
+  --grad-hero: linear-gradient(135deg, #041e35 0%, #030d1a 40%, #061a2e 100%);
+  --grad-primary: linear-gradient(135deg, #38bdf8, #5cc8f0, #67e8f9);
+  --grad-card: linear-gradient(145deg, rgba(92, 200, 240, 0.08), rgba(103, 232, 249, 0.05));
+  --grad-shimmer: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+
+  /* Tipografia */
+  --ff-body: 'Outfit', sans-serif;
+  --ff-script: 'Dancing Script', cursive;
+
+  /* Espaciado */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Bordes redondeados */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-glow: 0 0 60px rgba(92, 200, 240, 0.25);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Reset y Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ff-body);
+  background: var(--grad-hero);
+  color: var(--clr-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* --- Canvas de Fondo Espacial --- */
+#space-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Sistema de Vistas --- */
+.view {
+  position: relative;
+  z-index: 1;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ================================================
+   VISTA DE CUENTA REGRESIVA
+   ================================================ */
+#countdown-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.countdown-container {
+  text-align: center;
+  max-width: 720px;
+  width: 100%;
+  position: relative;
+}
+
+/* Anillo brillante detras del contenido */
+.sparkle-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid rgba(92, 200, 240, 0.08);
+  box-shadow:
+    0 0 80px rgba(92, 200, 240, 0.06),
+    inset 0 0 80px rgba(92, 200, 240, 0.04);
+  animation: sparkle-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle-pulse {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+.countdown-subtitle {
+  font-size: 1.1rem;
+  color: var(--clr-text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.countdown-name {
+  font-family: var(--ff-script);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  margin-bottom: var(--space-xs);
+  animation: fadeInDown 0.8s ease-out 0.15s both;
+}
+
+.name-glow {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(92, 200, 240, 0.4));
+}
+
+.countdown-label {
+  font-size: 1.25rem;
+  color: var(--clr-text-dim);
+  margin-bottom: var(--space-lg);
+  animation: fadeInDown 0.8s ease-out 0.3s both;
+}
+
+/* Bloques del Temporizador */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.timer-block {
+  background: var(--clr-bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-sm);
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timer-block:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.timer-value {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.timer-unit {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--clr-text-dim);
+  font-weight: 600;
+}
+
+.timer-separator {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  animation: blink 1s step-end infinite;
+  line-height: 1;
+  margin-top: -12px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.countdown-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--clr-bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  color: var(--clr-primary-light);
+  font-weight: 600;
+  animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+/* ================================================
+   VISTA DE CUMPLEANIOS
+   ================================================ */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.birthday-header {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  padding-top: 6rem;
+  position: relative;
+}
+
+/* Globos Flotantes */
+.balloon {
+  position: absolute;
+  font-size: 3rem;
+  animation: float-balloon 3s ease-in-out infinite;
+}
+
+.balloon-left {
+  top: 2rem;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.balloon-right {
+  top: 3rem;
+  right: 10%;
+  animation-delay: 1.5s;
+}
+
+@keyframes float-balloon {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+.birthday-tagline {
+  font-size: 1.1rem;
+  color: var(--clr-gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  animation: fadeInDown 0.8s ease-out 0.3s both;
+}
+
+.birthday-title {
+  font-family: var(--ff-script);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+  padding: 0.15em 0;
+  color: var(--clr-primary);
+}
+
+.letter-animate {
+  display: inline-block;
+  color: inherit;
+  animation: letter-pop 0.6s ease-out both;
+}
+
+/* Animacion escalonada de letras via JS */
+
+.birthday-name {
+  font-family: var(--ff-body);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--clr-primary-light);
+  margin-bottom: var(--space-md);
+  animation: fadeInUp 0.8s ease-out 1.5s both;
+}
+
+.cake-emoji {
+  font-size: 4rem;
+  margin-bottom: var(--space-md);
+  animation: cake-bounce 2s ease-in-out infinite;
+}
+
+@keyframes cake-bounce {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.birthday-message {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--clr-text-dim);
+  line-height: 1.8;
+  animation: fadeInUp 1s ease-out 1.8s both;
+}
+
+@keyframes letter-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.5) rotate(-10deg);
+  }
+
+  60% {
+    transform: translateY(-5px) scale(1.1) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* ================================================
+   COLLAGE DE FOTOS
+   ================================================ */
+.collage-section {
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.collage-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--clr-primary-light);
+}
+
+.collage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: var(--space-sm);
+}
+
+.collage-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px dashed rgba(92, 200, 240, 0.25);
+  background: var(--grad-card);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.collage-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--clr-primary);
+}
+
+.collage-item--large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.collage-item--tall {
+  grid-row: span 2;
+}
+
+.collage-item--wide {
+  grid-column: span 2;
+}
+
+/* Marcador de posicion de foto */
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  padding: var(--space-sm);
+  text-align: center;
+}
+
+.photo-icon {
+  font-size: 2.5rem;
+  opacity: 0.5;
+  transition: transform 0.3s ease;
+}
+
+.collage-item:hover .photo-icon {
+  transform: scale(1.2);
+}
+
+.photo-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--clr-primary);
+}
+
+.photo-hint {
+  font-size: 0.7rem;
+  color: var(--clr-text-dim);
+  opacity: 0.7;
+}
+
+/* Cuando una foto esta cargada */
+.collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================================================
+   SECCION DE DESEOS
+   ================================================ */
+.wishes-section {
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wishes-card {
+  background: var(--clr-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.wishes-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--clr-primary-light);
+}
+
+.wishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.wish-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--clr-primary);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.wish-item:hover {
+  transform: translateX(8px);
+  background: rgba(92, 200, 240, 0.06);
+}
+
+.wish-emoji {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wish-item p {
+  font-size: 1.05rem;
+  color: var(--clr-text-dim);
+  line-height: 1.6;
+}
+
+/* ================================================
+   PIE DE PAGINA
+   ================================================ */
+.birthday-footer {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  color: var(--clr-text-dim);
+  font-size: 0.9rem;
+}
+
+.birthday-footer p {
+  margin-bottom: 4px;
+}
+
+.footer-year {
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================================
+   LIGHTBOX
+   ================================================ */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  cursor: zoom-out;
+  animation: lightbox-in 0.3s ease-out;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 80px rgba(92, 200, 240, 0.15), var(--shadow-float);
+  animation: lightbox-zoom 0.35s ease-out;
+  cursor: default;
+}
+
+@keyframes lightbox-zoom {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+  z-index: 101;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* ================================================
+   ANIMACIONES
+   ================================================ */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Revelacion al scroll para elementos del collage */
+.collage-item {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealUp 0.6s ease-out forwards;
+}
+
+.collage-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.collage-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.collage-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.collage-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.collage-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.collage-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.collage-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.collage-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animacion escalonada de deseos */
+.wish-item {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.wish-item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.wish-item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.wish-item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.wish-item:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+/* ================================================
+   RESPONSIVO
+   ================================================ */
+@media (max-width: 768px) {
+  .timer {
+    gap: 6px;
+  }
+
+  .timer-block {
+    min-width: 65px;
+    padding: var(--space-sm) 8px;
+  }
+
+  .timer-separator {
+    font-size: 1.5rem;
+  }
+
+  .collage-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+
+  .collage-item--large {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .collage-item--tall {
+    grid-row: span 1;
+  }
+
+  .sparkle-ring {
+    width: 340px;
+    height: 340px;
+  }
+
+  .wishes-card {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-block {
+    min-width: 55px;
+    padding: 10px 6px;
+  }
+
+  .timer-value {
+    font-size: 1.6rem;
+  }
+
+  .timer-separator {
+    font-size: 1.2rem;
+  }
+
+  .collage-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+  }
+
+  .collage-item--large,
+  .collage-item--wide {
+    grid-column: span 1;
+  }
+
+  .balloon {
+    font-size: 2rem;
+  }
+}
