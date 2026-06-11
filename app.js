@@ -7,7 +7,7 @@
 
   // ===== CONFIGURACIÓN =====
   // Objetivo: 15 de Junio de 2026 a las 12:00 AM GMT-6
-  const FECHA_OBJETIVO = new Date("2026-06-10T00:00:00-06:00");
+  const FECHA_OBJETIVO = new Date("2026-06-15T00:00:00-06:00");
 
   // ===== REFERENCIAS AL DOM =====
   const vistaCuentaRegresiva = document.getElementById("countdown-view");
