@@ -7,7 +7,7 @@
 
   // ===== CONFIGURACIÓN =====
   // Objetivo: 15 de Junio de 2026 a las 12:00 AM GMT-6
-  const FECHA_OBJETIVO = new Date("2026-06-10T12:03:00-06:00");
+  const FECHA_OBJETIVO = new Date("2026-06-10T00:00:00-06:00");
 
   // ===== REFERENCIAS AL DOM =====
   const vistaCuentaRegresiva = document.getElementById("countdown-view");
@@ -21,9 +21,6 @@
   const temporizadorSegundos = document.querySelector("#timer-seconds .timer-value");
   const canvasEspacio = document.getElementById("space-canvas");
   const canvasConfeti = document.getElementById("confetti-canvas");
-  const cajaLuz = document.getElementById("lightbox");
-  const cajaLuzImg = document.getElementById("lightbox-img");
-  const cajaLuzCerrar = document.getElementById("lightbox-close");
 
   // ===== LÓGICA DE CUENTA REGRESIVA =====
   let intervaloCuentaRegresiva = null;
@@ -398,31 +395,7 @@
     dibujarConfeti();
   }
 
-  // ===== CAJA DE LUZ =====
-  function iniciarCajaLuz() {
-    // Cerrar al hacer clic en el fondo
-    cajaLuz.addEventListener("click", (e) => {
-      if (e.target === cajaLuz) cerrarCajaLuz();
-    });
-
-    // Boton de cerrar
-    cajaLuzCerrar.addEventListener("click", cerrarCajaLuz);
-
-    // Cerrar con tecla Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !cajaLuz.classList.contains("hidden")) {
-        cerrarCajaLuz();
-      }
-    });
-  }
-
-  function cerrarCajaLuz() {
-    cajaLuz.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
-
   // ===== INICIO =====
   iniciarEspacio();
-  iniciarCajaLuz();
   inicializar();
 })();

@@ -641,6 +641,47 @@ body {
   transform: scale(1.1);
 }
 
+/* Flechas de Navegacion */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.8rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1;
+  z-index: 101;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox-nav:hover {
+  background: rgba(92, 200, 240, 0.2);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 20px rgba(92, 200, 240, 0.3);
+}
+
+.lightbox-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
 /* ================================================
    ANIMACIONES
    ================================================ */
@@ -785,6 +826,20 @@ body {
   .wishes-card {
     padding: var(--space-lg);
   }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  .lightbox-prev {
+    left: 12px;
+  }
+
+  .lightbox-next {
+    right: 12px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -813,5 +868,19 @@ body {
 
   .balloon {
     font-size: 2rem;
+  }
+
+  .lightbox-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .lightbox-prev {
+    left: 8px;
+  }
+
+  .lightbox-next {
+    right: 8px;
   }
 }
